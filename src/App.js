@@ -1,6 +1,5 @@
 //Third one with more features
 
-
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -106,7 +105,7 @@ function BmiCalculator() {
           onChange={(e) => setWeightValue(e.target.value)}
         />
       </InputContainer>
-      <Button onClick={calculateBmi}>Click to Calculate BMI</Button>
+      <Button onClick={calculateBmi}>Calculate BMI</Button>
       {bmiValue && bmiMessage && (
         <Result>
           <p>
@@ -127,7 +126,7 @@ function BmiCalculator() {
               <option value="diet">Diet</option>
             </Select>
           </TipSelector>
-          <TipsButton onClick={fetchTips}>Get Tips</TipsButton>
+          <TipsButton onClick={fetchTips}>Fitness Tips</TipsButton>
           {showTips && tips && (
             <Tips>
               {tips.exerciseTips && (
@@ -146,10 +145,10 @@ function BmiCalculator() {
           )}
         </Result>
       )}
-      <PastTipsButton onClick={() => setShowTips(!showTips)}>View Past Tips</PastTipsButton> {/* Added button to show past tips */}
+      <PastTipsButton onClick={() => setShowTips(!showTips)}>View Daily Tips</PastTipsButton> {/* Added button to show past tips */}
       {showTips && (
         <PastTips>
-          <h3>Past 7 Days Tips:</h3>
+          <h3>Daily Tips:</h3>
           {pastTips.map((tip, index) => (
             <TipCard key={index}> {/* Use TipCard to display past tips */}
               <h4>{tip.date}</h4>
@@ -182,9 +181,11 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  color: cyan;
+  color: #0B3040;
   text-align: center;
   margin-bottom: 20px;
+  font-weight: 800;
+  font-size: 50px;
 `;
 
 const InputContainer = styled.div`
@@ -201,18 +202,18 @@ const Input = styled.input`
   width: 94%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid beige;
+  border: 1px solid #ddd;
 `;
 
 const Button = styled.button`
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #7b602a;
   color: #fff;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
 `;
@@ -229,7 +230,7 @@ const BmiValue = styled.span`
 `;
 
 const BmiMessage = styled.span`
-  color: #007bff;
+  color: orangered;
   font-weight: bold;
 `;
 
@@ -252,11 +253,11 @@ const TipsButton = styled.button`
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #28a745;
+  background-color: #7b602a;
   color: #fff;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
 `;
@@ -272,11 +273,11 @@ const PastTipsButton = styled.button` /* Added styling for PastTipsButton */
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #6c757d;
+  background-color: #7b602a;
   color: #fff;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
 `;
@@ -298,333 +299,3 @@ const TipCard = styled.div` /* Added styling for TipCard */
 
 
 
-// //Second
-
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-
-// function BmiCalculator() {
-//   const [heightValue, setHeightValue] = useState('');
-//   const [weightValue, setWeightValue] = useState('');
-//   const [bmiValue, setBmiValue] = useState('');
-//   const [bmiMessage, setBmiMessage] = useState('');
-//   const [tips, setTips] = useState('');
-//   const [showTips, setShowTips] = useState(false);
-
-//   const calculateBmi = () => {
-//     if (heightValue && weightValue) {
-//       const heightInMeters = heightValue / 100;
-//       const bmi = (weightValue / (heightInMeters * heightInMeters)).toFixed(2);
-//       setBmiValue(bmi);
-
-//       let message = '';
-//       if (bmi < 18.5) {
-//         message = 'You are Underweight';
-//       } else if (bmi >= 18.5 && bmi < 25) {
-//         message = 'You are Normal weight';
-//       } else if (bmi >= 25 && bmi < 30) {
-//         message = 'You are Overweight';
-//       } else {
-//         message = 'You are Obese';
-//       }
-//       setBmiMessage(message);
-//       setShowTips(false); // Reset tips visibility when BMI is recalculated
-//     } else {
-//       setBmiValue('');
-//       setBmiMessage('');
-//       setTips('');
-//       setShowTips(false); // Reset tips visibility when inputs are empty
-//     }
-//   };
-
-//   const fetchTips = () => {
-//     let exerciseTips = '';
-//     let dietTips = '';
-
-//     const bmi = parseFloat(bmiValue); // Convert bmiValue to a number
-//     if (bmi < 18.5) {
-//       exerciseTips = 'Focus on strength training exercises to build muscle mass. Avoid excessive cardio.';
-//       dietTips = 'Increase your calorie intake with nutrient-dense foods like nuts, seeds, lean meats, and whole grains.';
-//     } else if (bmi >= 18.5 && bmi < 25) {
-//       exerciseTips = 'Maintain a balanced workout routine including cardio, strength training, and flexibility exercises.';
-//       dietTips = 'Continue with a balanced diet that includes a variety of foods from all food groups.';
-//     } else if (bmi >= 25 && bmi < 30) {
-//       exerciseTips = 'Incorporate more cardio exercises like running, cycling, or swimming. Combine with strength training.';
-//       dietTips = 'Focus on portion control and include more fruits, vegetables, and lean proteins in your diet.';
-//     } else {
-//       exerciseTips = 'Start with low-impact cardio exercises like walking or swimming. Gradually increase intensity.';
-//       dietTips = 'Consult with a healthcare provider for a personalized diet plan. Aim for low-calorie, nutrient-dense foods.';
-//     }
-
-//     setTips({ exerciseTips, dietTips });
-//     setShowTips(true);
-//   };
-
-//   return (
-//     <Container>
-//       <Title> BMI Calculator</Title>
-//       <InputContainer>
-//         <Label htmlFor="height">Enter Your Height (cm):</Label>
-//         <Input
-//           type="number"
-//           id="height"
-//           value={heightValue}
-//           onChange={(e) => setHeightValue(e.target.value)}
-//         />
-//       </InputContainer>
-//       <InputContainer>
-//         <Label htmlFor="weight">Enter Your Weight (kg):</Label>
-//         <Input
-//           type="number"
-//           id="weight"
-//           value={weightValue}
-//           onChange={(e) => setWeightValue(e.target.value)}
-//         />
-//       </InputContainer>
-//       <Button onClick={calculateBmi}>Click to Calculate BMI</Button>
-//       {bmiValue && bmiMessage && (
-//         <Result>
-//           <p>
-//             Your BMI: <BmiValue>{bmiValue}</BmiValue>
-//           </p>
-//           <p>
-//             Result: <BmiMessage>{bmiMessage}</BmiMessage>
-//           </p>
-//           <TipsButton onClick={fetchTips}>Get Exercise and Diet Tips?</TipsButton>
-//           {showTips && tips && (
-//             <Tips>
-//               <h3>Exercise Tips:</h3>
-//               <p>{tips.exerciseTips}</p>
-//               <h3>Diet Tips:</h3>
-//               <p>{tips.dietTips}</p>
-//             </Tips>
-//           )}
-//         </Result>
-//       )}
-//     </Container>
-//   );
-// }
-
-// export default BmiCalculator;
-
-// const Container = styled.div`
-//   max-width: 400px;
-//   margin: 0 auto;
-//   padding: 20px;
-// `;
-
-// const Title = styled.h1`
-//   color: cyan;
-//   text-align: center;
-//   margin-bottom: 20px;
-// `;
-
-// const InputContainer = styled.div`
-//   margin-bottom: 10px;
-// `;
-
-// const Label = styled.label`
-//   display: block;
-//   font-weight: bold;
-//   color: #0B3040;
-//   margin-bottom: 5px;
-// `;
-
-// const Input = styled.input`
-//   width: 94%;
-//   padding: 10px;
-//   font-size: 16px;
-//   border: 1px solid beige;
-// `;
-
-// const Button = styled.button`
-//   display: block;
-//   width: 100%;
-//   padding: 10px;
-//   background-color: #007bff;
-//   color: #fff;
-//   font-size: 16px;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   margin-top: 10px;
-// `;
-
-// const Result = styled.div`
-//   margin-top: 20px;
-//   padding: 10px;
-//   background-color: #f0f0f0;
-//   border-radius: 4px;
-// `;
-
-// const BmiValue = styled.span`
-//   font-weight: bold;
-// `;
-
-// const BmiMessage = styled.span`
-//   color: #0B3040;
-//   font-weight: bold;
-// `;
-
-// const TipsButton = styled.button`
-//   display: block;
-//   width: 100%;
-//   padding: 10px;
-//   background-color: #28a745;
-//   color: #fff;
-//   font-size: 16px;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   margin-top: 10px;
-// `;
-
-// const Tips = styled.div`
-//   margin-top: 20px;
-//   padding: 10px;
-//   background-color: #f9f9f9;
-//   border-radius: 4px;
-  
-//   h3 {
-//     margin-bottom: 10px;
-//     color: #0B3040;
-//   }
-  
-//   p {
-//     margin-bottom: 10px;
-//     font-size: 15px;
-//     line-height: 1.4;
-//   }
-// `;
-
-
-
-
-// //Main One
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-
-// function BmiCalculator() {
-//   const [heightValue, setHeightValue] = useState('');
-//   const [weightValue, setWeightValue] = useState('');
-//   const [bmiValue, setBmiValue] = useState('');
-//   const [bmiMessage, setBmiMessage] = useState('');
-
-//   const calculateBmi = () => {
-//     if (heightValue && weightValue) {
-//       const heightInMeters = heightValue / 100;
-//       const bmi = (weightValue / (heightInMeters * heightInMeters)).toFixed(2);
-//       setBmiValue(bmi);
-
-//       let message = '';
-//       if (bmi < 18.5) {
-//         message = 'You are Underweight';
-//       } else if (bmi >= 18.5 && bmi < 25) {
-//         message = 'You are Normal weight';
-//       } else if (bmi >= 25 && bmi < 30) {
-//         message = 'You are Overweight';
-//       } else {
-//         message = 'You are Obese';
-//       }
-//       setBmiMessage(message);
-//     } else {
-//       setBmiValue('');
-//       setBmiMessage('');
-//     }
-//   };
-
-//   return (
-//     <Container>
-//       <Title> BMI Calculator</Title>
-//       <InputContainer>
-//         <Label htmlFor="height">Enter Your Height (cm):</Label>
-//         <Input
-//           type="number"
-//           id="height"
-//           value={heightValue}
-//           onChange={(e) => setHeightValue(e.target.value)}
-//         />
-//       </InputContainer>
-//       <InputContainer>
-//         <Label htmlFor="weight">Enter Your Weight (kg):</Label>
-//         <Input
-//           type="number"
-//           id="weight"
-//           value={weightValue}
-//           onChange={(e) => setWeightValue(e.target.value)}
-//         />
-//       </InputContainer>
-//       <Button onClick={calculateBmi}>Click to Calculate BMI</Button>
-//       {bmiValue && bmiMessage && (
-//         <Result>
-//           <p>
-//             Your BMI: <BmiValue>{bmiValue}</BmiValue>
-//           </p>
-//           <p>
-//             Result: <BmiMessage>{bmiMessage}</BmiMessage>
-//           </p>
-//         </Result>
-//       )}
-//     </Container>
-//   );
-// }
-
-// export default BmiCalculator;
-
-// const Container = styled.div`
-//   max-width: 400px;
-//   margin: 0 auto;
-//   padding: 20px;
-// `;
-
-// const Title = styled.h1`
-//   color: cyan;
-//   text-align: center;
-//   margin-bottom: 20px;
-// `;
-
-// const InputContainer = styled.div`
-//   margin-bottom: 10px;
-// `;
-
-// const Label = styled.label`
-//   display: block;
-//   font-weight: bold;
-//   margin-bottom: 5px;
-// `;
-
-// const Input = styled.input`
-//   width: 94%;
-//   padding: 10px;
-//   font-size: 16px;
-//   border: 1px solid beige;
-  
-// `;
-
-// const Button = styled.button`
-//   display: block;
-//   width: 100%;
-//   padding: 10px;
-//   background-color: #007bff;
-//   color: #fff;
-//   font-size: 16px;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-// `;
-
-// const Result = styled.div`
-//   margin-top: 20px;
-//   padding: 10px;
-//   background-color: #f0f0f0;
-//   border-radius: 4px;
-// `;
-
-// const BmiValue = styled.span`
-//   font-weight: bold;
-// `;
-
-// const BmiMessage = styled.span`
-//   color: #007bff;
-//   font-weight: bold;
-// `;
